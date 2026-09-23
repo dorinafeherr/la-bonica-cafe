@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --cream: #fdfbf7;
+        --cream-alt: #f5efe6;
+        --sand: #efe6d8;
+        --ink: #2c221e;
+        --ink-soft: #594a42;
+        --muted: #8c7a6b;
+        --coffee: #6f4e37;
+        --coffee-dark: #543a28;
+        --terracotta: #c86d51;
+        --gold: #d4a359;
+        --olive: #6e7a55;
+        --line: #e8dec9;
+
+        --background: 42 33% 98%;
+        --foreground: 20 16% 15%;
+        --card: 0 0% 100%;
+        --card-foreground: 20 16% 15%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 20 16% 15%;
+        --primary: 26 32% 33%;
+        --primary-foreground: 42 33% 98%;
+        --secondary: 36 38% 92%;
+        --secondary-foreground: 20 16% 15%;
+        --muted-color: 36 38% 92%;
+        --muted-foreground: 25 13% 49%;
+        --accent: 14 51% 55%;
+        --accent-foreground: 42 33% 98%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 42 32% 88%;
+        --input: 42 32% 88%;
+        --ring: 14 51% 55%;
+        --radius: 0.5rem;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply bg-[var(--cream)] text-[var(--ink)] antialiased;
+        font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+        text-rendering: optimizeLegibility;
+    }
+
+    .font-display {
+        font-family: "Fraunces", Georgia, serif;
+        font-optical-sizing: auto;
+    }
+
+    ::selection {
+        background: var(--terracotta);
+        color: var(--cream);
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--terracotta);
+        outline-offset: 3px;
+        border-radius: 4px;
+    }
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+}
+
+/* Marquesina editorial */
+@keyframes marquee-scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.marquee-track {
+    animation: marquee-scroll 46s linear infinite;
+    will-change: transform;
+}
+
+/* Grano sutil */
+.grain::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    .marquee-track {
+        animation: none;
+    }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@layer base {
+    [data-debug-wrapper="true"] {
+        display: contents !important;
+    }
+}
